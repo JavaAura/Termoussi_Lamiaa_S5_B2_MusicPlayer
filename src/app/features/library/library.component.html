@@ -1,0 +1,58 @@
+<div class="library-container">
+    <!-- Add Track Button -->
+    <button class="add-track-btn" (click)="openAddTrackForm()">Add Track</button>
+
+    <!-- Track List Table -->
+    <table class="track-list">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Category</th>
+                <th>Duration</th>
+                <th>Added Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let track of tracks$ | async">
+                <td>{{ track.title }}</td>
+                <td>{{ track.artist }}</td>
+                <td>{{ track.category }}</td>
+                <td>{{ track.duration }} min</td>
+                <td>{{ track.addedDate | date }}</td>
+                <td>
+                    <!-- Actions like Edit, Delete can go here -->
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Popup Form -->
+    <div class="popup-form" *ngIf="isAddTrackFormVisible">
+        <h2>Add New Track</h2>
+        <form (ngSubmit)="addTrack()">
+            <label for="title">Title</label>
+            <input type="text" id="title" [(ngModel)]="newTrack.title" name="title" required />
+
+            <label for="artist">Artist</label>
+            <input type="text" id="artist" [(ngModel)]="newTrack.artist" name="artist" required />
+
+            <label for="category">Category</label>
+            <select id="category" [(ngModel)]="newTrack.category" name="category" required>
+                <option *ngFor="let category of musicCategories" [value]="category">{{ category }}</option>
+            </select>
+
+            <label for="coverUrl">Cover URL</label>
+            <input type="file" id="coverUrl" accept="image/*" name="coverUrl" (change)="onCoverSelected($event)" />
+
+            <label for="audioFile">Audio File</label>
+            <input type="file" id="audioFile" (change)="onFileSelected($event)" />
+
+            <button type="submit">Add Track</button>
+            <button type="button" (click)="closeAddTrackForm()">Cancel</button>
+        </form>
+    </div>
+</div>

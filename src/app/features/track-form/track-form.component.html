@@ -1,0 +1,78 @@
+<div *ngIf="formVisible" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-3xl w-full">
+        <h2 class="text-xl font-semibold text-center text-gray-900 mb-4">
+            {{ trackToUpdate ? 'Update Track' : 'Add New Track' }}
+        </h2>
+
+        <form (ngSubmit)="onSaveTrack()" class="space-y-4">
+            <!-- Title and Artist Inputs in a row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                    <input type="text" id="title" [(ngModel)]="track.title" name="title"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required />
+                </div>
+
+                <div>
+                    <label for="artist" class="block text-sm font-medium text-gray-700">Artist</label>
+                    <input type="text" id="artist" [(ngModel)]="track.artist" name="artist"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required />
+                </div>
+            </div>
+
+            <!-- Description, and Category Inputs in a row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="description" [(ngModel)]="track.description" name="description"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                    <select id="category" [(ngModel)]="track.category" name="category"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        required>
+                        <option value="" disabled>Select a category</option>
+                        <option *ngFor="let category of categories" [value]="category">{{ category | titlecase }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- File URL, Cover URL, and Audio File Upload Inputs in a row -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label for="coverFile" class="block text-sm font-medium text-gray-700">Cover Image File</label>
+                    <input type="file" accept="image/*" (change)="onCoverFileChange($event)"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+                </div>
+
+                <div>
+                    <label for="audioFile" class="block text-sm font-medium text-gray-700">Audio File</label>
+                    <input type="file" id="audioFile"  name="audioFile" accept="audio/*"
+                        (change)="onAudioFileChange($event)"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none" />
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="text-red-500 text-sm mt-2">
+                {{ errorMessage }}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-between mt-6">
+                <button type="button"
+                    class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none"
+                    (click)="toggleTrackForm()">Cancel</button>
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">
+                    Save Track
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
