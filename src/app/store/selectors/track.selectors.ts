@@ -10,7 +10,6 @@ export interface TrackState {
     error: any;
 }
 
-// Feature selector for the Track state
 export const selectTrackState = createFeatureSelector<TrackState>('track');
 
 // Selector for all tracks

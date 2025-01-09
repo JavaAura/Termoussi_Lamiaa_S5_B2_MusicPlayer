@@ -20,15 +20,15 @@ import { TrackService } from '../../core/services/track.service';
   styleUrl: './library.component.scss'
 })
 export class LibraryComponent {
-  tracks$: Observable<Track[]> = this.store.select('tracks'); // Tracks observable from the store
-  musicCategories = Object.values(MusicCategory);  // Available music categories
-  isAddTrackFormVisible = false;  // Control visibility of the Add Track form
-  newTrack: Partial<Track> = {};  // Initialize newTrack object as a partial Track
+  tracks$: Observable<Track[]> = this.store.select('tracks');
+  musicCategories = Object.values(MusicCategory);  
+  isAddTrackFormVisible = false; 
+  newTrack: Partial<Track> = {};  
 
   constructor(private store: Store<{ tracks: Track[] }>, private trackService: TrackService) { }
 
   ngOnInit() {
-    // Load tracks from IndexedDB and update the store
+
     this.trackService.getTracks().subscribe(tracks => {
       tracks.forEach(track => this.store.dispatch(addTrack({ track })));
     });
@@ -67,19 +67,19 @@ export class LibraryComponent {
   // Add a new track and update the store
   addTrack() {
     const track: Track = {
-      id: Date.now(),  // Generate a unique ID using the current timestamp
+      id: Date.now(), 
       title: this.newTrack.title!,
       artist: this.newTrack.artist!,
       description: this.newTrack.description,
-      duration: 3,  // Placeholder for duration calculation
+      duration: 3,
       category: this.newTrack.category!,
-      addedDate: new Date(),  // Current date as added date
+      addedDate: new Date(),  
       coverUrl: this.newTrack.coverUrl!,
       audioFile: this.newTrack.audioFile
     };
 
     // Dispatch addTrack action to update the store
     this.store.dispatch(addTrack({ track }));
-    this.closeAddTrackForm();  // Close the form after adding the track
+    this.closeAddTrackForm();  
   }
 }
