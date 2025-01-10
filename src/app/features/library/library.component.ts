@@ -5,9 +5,10 @@ import { MusicCategory, Track } from '../../core/models/track';
 
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { addTrack } from '../../store/actions/actions/track.actions';
+import { addTrack, loadTracks } from '../../store/actions/actions/track.actions';
 import { CommonModule } from '@angular/common';
 import { TrackService } from '../../core/services/track.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,13 +26,11 @@ export class LibraryComponent {
   isAddTrackFormVisible = false; 
   newTrack: Partial<Track> = {};  
 
-  constructor(private store: Store<{ tracks: Track[] }>, private trackService: TrackService) { }
+  constructor(private store: Store<{ tracks: Track[] }>, private trackService: TrackService, private router: Router) { }
 
   ngOnInit() {
-
-    this.trackService.getTracks().subscribe(tracks => {
-      tracks.forEach(track => this.store.dispatch(addTrack({ track })));
-    });
+    this.store.dispatch(loadTracks());
+    
   }
 
   // Open the form to add a new track
@@ -81,5 +80,10 @@ export class LibraryComponent {
     // Dispatch addTrack action to update the store
     this.store.dispatch(addTrack({ track }));
     this.closeAddTrackForm();  
+  }
+  
+  openTrackPage(track: any) {
+    console.log(track);
+    this.router.navigate([`/track/${track.id}`]);
   }
 }
