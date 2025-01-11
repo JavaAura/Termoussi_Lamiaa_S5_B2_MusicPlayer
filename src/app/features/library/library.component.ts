@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, startWith, Subscription } from 'rxjs';
 import { MusicCategory, Track } from '../../core/models/track';
 
 import { FormsModule } from '@angular/forms';
@@ -22,28 +22,40 @@ import { Router } from '@angular/router';
 })
 export class LibraryComponent {
   tracks$: Observable<Track[]> = this.store.select('tracks');
-  musicCategories = Object.values(MusicCategory);  
-  isAddTrackFormVisible = false; 
-  newTrack: Partial<Track> = {};  
+  filteredTracks$: Observable<Track[]>;
+  musicCategories = Object.values(MusicCategory);
+  isAddTrackFormVisible = false;
+  newTrack: Partial<Track> = {};
+  searchTerm: string = '';
+  private searchTerm$: BehaviorSubject<string> = new BehaviorSubject('');
 
-  constructor(private store: Store<{ tracks: Track[] }>, private trackService: TrackService, private router: Router) { }
+  constructor(private store: Store<{ tracks: Track[] }>, private trackService: TrackService, private router: Router) {
+    this.filteredTracks$ = combineLatest([
+      this.tracks$,
+      this.searchTerm$
+    ]).pipe(
+      map(([tracks, searchTerm]) => {
+        return tracks.filter(track => track.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      })
+    );
+  }
 
   ngOnInit() {
     this.store.dispatch(loadTracks());
-    
   }
 
-  // Open the form to add a new track
+  onSearch(event: string): void {
+    this.searchTerm$.next(event);
+  }
+
   openAddTrackForm() {
     this.isAddTrackFormVisible = true;
   }
 
-  // Close the Add Track form
   closeAddTrackForm() {
     this.isAddTrackFormVisible = false;
   }
 
-  // Handle the cover image selection (file input)
   onCoverSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -55,7 +67,6 @@ export class LibraryComponent {
     }
   }
 
-  // Handle the audio file selection (file input)
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -63,27 +74,24 @@ export class LibraryComponent {
     }
   }
 
-  // Add a new track and update the store
   addTrack() {
     const track: Track = {
-      id: Date.now(), 
+      id: Date.now(),
       title: this.newTrack.title!,
       artist: this.newTrack.artist!,
       description: this.newTrack.description,
       duration: 3,
       category: this.newTrack.category!,
-      addedDate: new Date(),  
+      addedDate: new Date(),
       coverUrl: this.newTrack.coverUrl!,
       audioFile: this.newTrack.audioFile
     };
 
-    // Dispatch addTrack action to update the store
     this.store.dispatch(addTrack({ track }));
-    this.closeAddTrackForm();  
+    this.closeAddTrackForm();
   }
-  
+
   openTrackPage(track: any) {
-    console.log(track);
     this.router.navigate([`/track/${track.id}`]);
   }
 }
