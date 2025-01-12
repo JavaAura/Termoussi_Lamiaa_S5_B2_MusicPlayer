@@ -3,7 +3,7 @@ import { Actions, createEffect,ofType } from '@ngrx/effects';
 import { TrackService } from '../../../core/services/track.service';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { addTrackFailure, addTrackSuccess, loadTracksFailure, loadTracksSuccess } from '../../actions/actions/track.actions';
+import { addTrackFailure, addTrackSuccess, deleteTrack, deleteTrackFailure, deleteTrackSuccess, loadTracksFailure, loadTracksSuccess } from '../../actions/actions/track.actions';
 import { addTrack, loadTracks } from '../../actions/actions/track.actions';
 
 
@@ -32,6 +32,18 @@ export class TrackEffects {
         this.trackService.getTracks().pipe(
           map(tracks => loadTracksSuccess({ tracks })),
           catchError(error => of(loadTracksFailure({ error })))
+        )
+      )
+    )
+  );
+
+  deleteTrack$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteTrack),
+      mergeMap(({ id }) =>
+        this.trackService.deleteTrack(id).pipe(
+          map(() => deleteTrackSuccess({ id })),
+          catchError(error => of(deleteTrackFailure({ error })))
         )
       )
     )

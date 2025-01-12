@@ -5,7 +5,7 @@ import { MusicCategory, Track } from '../../core/models/track';
 
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { addTrack, loadTracks } from '../../store/actions/actions/track.actions';
+import { addTrack, deleteTrack, loadTracks } from '../../store/actions/actions/track.actions';
 import { CommonModule } from '@angular/common';
 import { TrackService } from '../../core/services/track.service';
 import { Router } from '@angular/router';
@@ -62,5 +62,16 @@ export class LibraryComponent {
 
   openTrackPage(track: Track) {
     this.router.navigate([`/track/${track.id}`]);
+  }
+
+
+  updateTrack(track: Track) {
+    // Logic to update the track
+    console.log('Updating track:', track);
+  }
+  
+  deleteTrack(track: Track) {
+    console.log('Deleting track:', track);
+    this.store.dispatch(deleteTrack({ id: track.id })); 
   }
 }

@@ -8,3 +8,6 @@ export const addTrackFailure = createAction('[Track] Add Track Failure', props<{
 export const loadTracks = createAction('[Track] Load Tracks');
 export const loadTracksSuccess = createAction('[Track] Load Tracks Success', props<{ tracks: Track[] }>());
 export const loadTracksFailure = createAction('[Track] Load Tracks Failure', props<{ error: any }>());
+export const deleteTrack = createAction('[Track] Delete Track', props<{ id: number }>());
+export const deleteTrackSuccess = createAction('[Track] Delete Track Success', props<{ id: number }>());
+export const deleteTrackFailure = createAction('[Track] Delete Track Failure', props<{ error: any }>());
