@@ -11,3 +11,17 @@ export const loadTracksFailure = createAction('[Track] Load Tracks Failure', pro
 export const deleteTrack = createAction('[Track] Delete Track', props<{ id: number }>());
 export const deleteTrackSuccess = createAction('[Track] Delete Track Success', props<{ id: number }>());
 export const deleteTrackFailure = createAction('[Track] Delete Track Failure', props<{ error: any }>());
+export const updateTrack = createAction(
+    '[Track] Update Track',
+    props<{ track: Track }>()
+);
+
+export const updateTrackSuccess = createAction(
+    '[Track] Update Track Success',
+    props<{ track: Track }>()
+);
+
+export const updateTrackFailure = createAction(
+    '[Track] Update Track Failure',
+    props<{ error: any }>()
+);

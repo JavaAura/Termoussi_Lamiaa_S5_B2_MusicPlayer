@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable, startWith, Subscription } from 'rxjs';
 import { MusicCategory, Track } from '../../core/models/track';
@@ -22,6 +22,7 @@ import { TrackFormComponent } from '../track-form/track-form.component';
   styleUrl: './library.component.scss'
 })
 export class LibraryComponent {
+  @Input() trackToUpdate: Track | null = null;
   tracks$: Observable<Track[]> = this.store.select('tracks');
   filteredTracks$: Observable<Track[]>;
   isAddTrackFormVisible = false;
@@ -65,10 +66,16 @@ export class LibraryComponent {
   }
 
 
-  updateTrack(track: Track) {
-    // Logic to update the track
-    console.log('Updating track:', track);
+  openUpdateTrackForm(track: Track) {
+    this.isAddTrackFormVisible = true;
+    this.trackToUpdate = { ...track };  // Copy the track for editing
   }
+
+  // updateTrack(track: Track) {
+  //   console.log('Updating track:', track);
+  //   this.store.dispatch(updateTrack({ track })); // Dispatch update action to the store
+  //   this.closeAddTrackForm();  // Close the form after update
+  // }
   
   deleteTrack(track: Track) {
     console.log('Deleting track:', track);

@@ -76,7 +76,7 @@ export class TrackFormComponent {
       title: '',
       artist: '',
       description: '',
-      category: MusicCategory.OTHER,
+      category: MusicCategory.OTHER, // Consistent default enum value
       coverUrl: '',
       audioFile: undefined 
     };
