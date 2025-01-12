@@ -1,27 +1,57 @@
-# MusicPlayer
+# 🎶 MusicStream 🎧
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+Welcome to MusicStream – a simple Angular-based music application that allows users to listen and manage their local music collection. Built using NgRx for state management, this app ensures a smooth user experience and maintainable architecture while providing powerful audio features. 🎼
 
-## Development server
+## 🚀 Project Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+MusicStream provides an easy-to-use platform to listen to your local music files. You can organize, search, and play your music tracks with essential audio controls. The app is structured to ensure flexibility and scalability, leveraging the power of NgRx for managing the application state.
+Key Features
 
-## Code scaffolding
+    Track Management:
+        Add, Update, Delete, and View Tracks
+        Track Details: Title, Artist, Description, Category (Pop, Rock, etc.)
+        Auto-generated metadata: Add Date, Duration, and Category
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    Audio Player:
+        Play, Pause, Next, Previous Track
+        Volume Control and Progress Tracking
 
-## Build
+    Library:
+        Full List of Tracks with Search
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🛠️ Technology Stack
 
-## Running unit tests
+    Angular 17 – Modern frontend framework for building dynamic single-page applications
+    NgRx – State management to ensure a centralized and predictable state
+    RxJS – Reactive programming library for handling async data
+    TypeScript – Static typing for enhanced code maintainability
+    TailwindCSS – For responsive and modern UI design
+    IndexedDB – Storage of audio files and track metadata
+    Web Audio API – For advanced audio manipulation and playback controls
+    Jasmine – Unit testing framework for writing tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📲 Setup and Installation
+Prerequisites
 
-## Running end-to-end tests
+    Node.js (>=14.x.x)
+    Angular CLI (>=15.x.x)
+    Docker (for containerization)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Installation Steps
+  1.Clone the repository:
+       
+        git clone https://github.com/JavaAura/Termoussi_Lamiaa_S5_B2_MusicPlayer.git
+  2.Install dependencies:
+        
+        npm install
+  3.Run the application locally:
+       
+        ng serve
+  The app will be running on http://localhost:4200.
 
-## Further help
+## Author and Contact Information
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    Termoussi Lamiaa 
+    Email: lamiaa3105@gmail.com
+
+          
