@@ -22,6 +22,7 @@ import { TrackFormComponent } from '../track-form/track-form.component';
   styleUrl: './library.component.scss'
 })
 export class LibraryComponent {
+  
   @Input() trackToUpdate: Track | null = null;
   tracks$: Observable<Track[]> = this.store.select('tracks');
   filteredTracks$: Observable<Track[]>;
@@ -59,6 +60,7 @@ export class LibraryComponent {
 
   closeAddTrackForm() {
     this.isAddTrackFormVisible = false;
+    this.trackToUpdate = null; 
   }
 
   openTrackPage(track: Track) {
@@ -68,14 +70,9 @@ export class LibraryComponent {
 
   openUpdateTrackForm(track: Track) {
     this.isAddTrackFormVisible = true;
-    this.trackToUpdate = { ...track };  // Copy the track for editing
+    this.trackToUpdate = { ...track }; 
   }
 
-  // updateTrack(track: Track) {
-  //   console.log('Updating track:', track);
-  //   this.store.dispatch(updateTrack({ track })); // Dispatch update action to the store
-  //   this.closeAddTrackForm();  // Close the form after update
-  // }
   
   deleteTrack(track: Track) {
     console.log('Deleting track:', track);

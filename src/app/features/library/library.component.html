@@ -82,10 +82,8 @@
                         <!-- Update Button -->
                         <button (click)="openUpdateTrackForm(track)"
                             class="text-yellow-400 hover:text-yellow-300 transition-colors duration-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M11 17l4-4m0 0l-4-4m4 4H7m9 4a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 3l7 7-10 10H5v-7L15 3z" />
                             </svg>
                         </button>
 
@@ -120,8 +118,8 @@
         </div>
 
         <!-- Add Track Modal -->
-        <app-track-form *ngIf="isAddTrackFormVisible"   (closeModal)="closeAddTrackForm()">
+        <app-track-form *ngIf="isAddTrackFormVisible"    [track]="trackToUpdate"  (closeModal)="closeAddTrackForm()">
         </app-track-form>
-
+        
     </div>
 </div>

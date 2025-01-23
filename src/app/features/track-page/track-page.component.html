@@ -86,31 +86,11 @@
             </div>
         </div>
 
-        <!-- Volume & Progress Controls -->
-        <!-- <div class="space-y-6 px-4">
-            <div class="space-y-2">
-                <label class="block text-sm font-medium text-purple-200">Volume</label>
-                <input type="range" [(ngModel)]="volume" min="0" max="1" step="0.1" class="custom-range"
-                    (input)="updateVolume()" />
-            </div>
-
-            <div class="space-y-2">
-                <label class="block text-sm font-medium text-purple-200">Progress</label>
-                <input type="range" [(ngModel)]="progress" min="0" max="100" step="1" class="custom-range"
-                    (input)="updateProgress()" />
-            </div>
-        </div> -->
-
+   
         <!-- Track Details -->
         <div class="glass-morphism rounded-2xl p-6 space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-purple-200">
-                <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>{{ currentTrack.duration }} minutes</span>
-                </div>
+              
                 <div class="flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
